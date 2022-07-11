@@ -65,6 +65,15 @@ class ControladorVehiculo{
 
             //restar las 2 fechas y obtener la diferencia de tiempo en minutos
             let diferencia=fechaSalida.getTime()-fechaEntrada.getTime()
+            let diferenciaEnSegundos=diferencia/1000 //porque son mil milisegundos
+            let diferenciaEnMinutos=diferenciaEnSegundos/60
+
+            //calculamos el costo del parqueadero
+            let costo=diferenciaEnMinutos*tarifa
+
+            //armo el paquete de datos a actualizar
+            datos.fecha_salida=fechaSalida
+            datos.total_pago=costo
 
 
             await servicioVehiculo.editar(id,datos)
